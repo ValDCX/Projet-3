@@ -1,4 +1,4 @@
 
-public class Mastermind {
+public class Mastermind extends Jeu{
 
 }

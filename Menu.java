@@ -14,8 +14,9 @@ public class Menu {
 			
 		Scanner sc = new Scanner (System.in);
 		
-		if (!sc.hasNextByte()) {//Si l'entrée clavier n'est pas un byte
-			System.out.println("\nVeuillez choisir parmi les propositions.");
+		//Si l'entrée clavier n'est pas un byte
+		if (!sc.hasNextByte()) {
+			erreurChoix();
       sc.next(); 
       continue;
   }
@@ -33,9 +34,16 @@ public class Menu {
 		case 3: System.out.println("À bientôt !");//Quitter
 		break;
 		
-		default : System.out.println("\nVeuillez choisir parmi les propositions.");
+		default : erreurChoix();
 		
 	 }
 	} while (choix != 1 && choix != 2 && choix != 3);
  }
+	
+	//******Méthodes******
+	
+	//Message affiché si une entrée clavier ne correspond à aucun choix proposé 
+	public static void erreurChoix() {
+		System.out.println("\nVeuillez choisir parmi les propositions.");
+	}
 }

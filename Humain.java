@@ -1,4 +1,4 @@
 
-public class Humain {
+public class Humain extends Joueur{
 
 }

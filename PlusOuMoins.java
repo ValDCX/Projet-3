@@ -1,4 +1,4 @@
 
-public class PlusOuMoins {
+public class PlusOuMoins extends Jeu{
 
 }

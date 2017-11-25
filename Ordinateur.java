@@ -1,4 +1,4 @@
 
-public class Ordinateur {
+public class Ordinateur extends Joueur{
 
 }
