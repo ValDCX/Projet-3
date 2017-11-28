@@ -1,32 +1,67 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Jeu {
 
-	int longueurNombreMystere = 6;
-	int nombreUtilises[] = {0,1,2,3,4,5,6};
+	String nomDuJeu;
+	int longueurNombreMystere = 4;
+	int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	long nombreMystere;
 	
-	public Jeu() {
-		genererNombreMystere();
-		System.out.println(nombreMystere);
+	public Jeu(String nomDuJeu) {
+		
+		this.nomDuJeu = nomDuJeu;
+		byte choix = 0;
+		
+		System.out.println(afficherNom());
+		do {
+			System.out.println("\nChoisissez un mode de jeu :");
+			System.out.println("\n1· Challenger \n2· Défenseur \n3· Duel \n4· Quitter");
+				
+			Scanner sc = new Scanner (System.in);
+			
+			//Si l'entrée clavier n'est pas un byte
+			if (!sc.hasNextByte()) {
+				Menu.erreurChoix();
+	      sc.next(); 
+	      continue;
+		}
+			choix = sc.nextByte();
+			switch (choix){
+			
+			case 1: this.challenger();
+			break;
+			
+			case 2: this.defenseur();
+			break;
+			
+			case 3: this.duel();
+			break;
+			
+			case 4: break;
+		
+			default : Menu.erreurChoix();
+			}
+		} while (choix != 1 && choix != 2 && choix != 3	&& choix !=4);
 	}
 	
 	//******Méthodes*******
 	
 	public void challenger() {
-		
+		System.out.println("********MODE CHALLENGER********");
+		genererNombreMystere();
 	}
 	
 	public void defenseur() {
-		
+		System.out.println("********MODE DEFENSEUR********");
+		genererNombreMystere();
 	}
 	
 	public void duel() {
-		
+		System.out.println("********MODE DUEL********");
+		genererNombreMystere();
 	}
 	
-	//*****Méthodes*****
-
 	//Génération du nombre mystère
 	public void genererNombreMystere() {
 		
@@ -43,17 +78,19 @@ public class Jeu {
 			chiffreNombreMystere[i] = random.nextInt(maximumPossible+1);
 			
 			sChiffre += chiffreNombreMystere[i];//On ajoute le chiffre généré au String sChiffre
-			System.out.println(sChiffre);
 		}
 		
-		//Si le premier chiffre aléatoire est un zéro, il est remplacé par un autre chiffre aléatoire entre 1 et 9 (sinon il ne s'affichera pas)
+		//Si le premier chiffre aléatoire est un zéro, il est remplacé par un autre chiffre aléatoire entre 1 et maximumPossible (sinon il ne s'affichera pas)
 		if (sChiffre.charAt(0) == '0') {
-			int r = random.nextInt(9-1)+1;
+			int r = random.nextInt(maximumPossible-1)+1;
 			sChiffre = r+sChiffre.substring(1, sChiffre.length());
 		}
 		
 		nombreMystere = Long.parseLong((sChiffre));//On convertit sChiffre en Long dans nombreMystere
-
+		System.out.println(nombreMystere);
 	}
 	
+	public String afficherNom() {
+		return this.nomDuJeu;
+	}
 }

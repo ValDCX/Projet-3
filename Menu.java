@@ -34,8 +34,7 @@ public class Menu {
 		case 3: System.out.println("À bientôt !");//Quitter
 		break;
 		
-		default : erreurChoix();
-		
+		default : erreurChoix();	
 	 }
 	} while (choix != 1 && choix != 2 && choix != 3);
  }
