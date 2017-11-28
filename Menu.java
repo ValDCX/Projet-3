@@ -45,4 +45,8 @@ public class Menu {
 	public static void erreurChoix() {
 		System.out.println("\nVeuillez choisir parmi les propositions.");
 	}
+	
+	public static void erreurNombre() {
+		System.out.println("\nVeuillez entrer un nombre à "+Jeu.longueurNombreMystere+" chiffres.");
+	}
 }

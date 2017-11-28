@@ -4,8 +4,9 @@ import java.util.Scanner;
 public class Jeu {
 
 	String nomDuJeu;
-	int longueurNombreMystere = 4;
-	int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
+	String resultat;
+	static int longueurNombreMystere = 4;
+	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	long nombreMystere;
 	
 	public Jeu(String nomDuJeu) {
@@ -50,6 +51,7 @@ public class Jeu {
 	public void challenger() {
 		System.out.println("********MODE CHALLENGER********");
 		genererNombreMystere();
+		Humain.proposerNombre();
 	}
 	
 	public void defenseur() {
@@ -90,6 +92,7 @@ public class Jeu {
 		System.out.println(nombreMystere);
 	}
 	
+	//Retourner le nom du jeu sélectionné
 	public String afficherNom() {
 		return this.nomDuJeu;
 	}
