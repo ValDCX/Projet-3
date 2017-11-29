@@ -2,7 +2,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jeu {
-
+	
+	Joueur joueur1;
+	Joueur joueur2;
 	String nomDuJeu;
 	String resultat;
 	static int longueurNombreMystere = 4;
@@ -51,7 +53,9 @@ public class Jeu {
 	public void challenger() {
 		System.out.println("********MODE CHALLENGER********");
 		genererNombreMystere();
-		Humain.proposerNombre();
+		joueur1 = new Humain();
+		joueur1.proposerNombre();
+		comparerNombres(joueur1);
 	}
 	
 	public void defenseur() {
@@ -95,5 +99,26 @@ public class Jeu {
 	//Retourner le nom du jeu sélectionné
 	public String afficherNom() {
 		return this.nomDuJeu;
+	}
+	
+	//Comparer la proposition du joueur au nombre mystère
+	public void comparerNombres(Joueur joueur) {
+		
+		String sProposition = String.valueOf(joueur.proposition);//On met la valeur de proposition dans un String
+		String sNombreMystere = String.valueOf(this.nombreMystere);//Idem avec NombreMystere
+		String resultat = "";//Ce string contiendra le résultat sous forme de + - =
+		
+		for (int i = 0; i < longueurNombreMystere; i++) {
+			int chiffrePropose = Character.getNumericValue(sProposition.charAt(i));
+			int chiffreNombreMystere = Character.getNumericValue(sNombreMystere.charAt(i));
+			
+			if (chiffrePropose > chiffreNombreMystere) 
+				resultat += "-";
+			else if (chiffrePropose < chiffreNombreMystere)
+				resultat += "+";
+			else if (chiffrePropose == chiffreNombreMystere)
+				resultat += "=";
+		}
+		System.out.println("Résultat : "+resultat);
 	}
 }
