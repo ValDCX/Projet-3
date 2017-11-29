@@ -11,7 +11,8 @@ public class Joueur {
 
 	public static void proposerNombre() {
 		
-		System.out.println("Proposition : ");
+		Jeu.compteur++;
+		System.out.print("Proposition : ");
 		do {	
 			Scanner sc = new Scanner (System.in);
 			
@@ -27,7 +28,5 @@ public class Joueur {
 			if (longueurProposition != Jeu.longueurNombreMystere)
 				Menu.erreurNombre();
 		} while (longueurProposition != Jeu.longueurNombreMystere);//Boucle tant que la proposition n'a pas le même nombre de chiffres que le paramètre longueurNombreMystere
-		
-		System.out.println("Votre proposition est : "+proposition);
 	}
 }

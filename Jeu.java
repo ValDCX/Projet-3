@@ -9,6 +9,7 @@ public class Jeu {
 	String resultat;
 	static int longueurNombreMystere = 4;
 	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
+	static int compteur;
 	long nombreMystere;
 	
 	public Jeu(String nomDuJeu) {
@@ -52,10 +53,15 @@ public class Jeu {
 	
 	public void challenger() {
 		System.out.println("********MODE CHALLENGER********");
+		compteur = 0;
 		genererNombreMystere();
 		joueur1 = new Humain();
-		joueur1.proposerNombre();
-		comparerNombres(joueur1);
+		//On boucle tant que le nombre mystère n'est pas trouvé
+		do {
+			joueur1.proposerNombre();
+			comparerNombres(joueur1);
+		} while (joueur1.proposition != nombreMystere);
+		System.out.println("Bravo ! Vous avez trouvé le nombre mystère en "+compteur+" coups !");
 	}
 	
 	public void defenseur() {
@@ -106,7 +112,7 @@ public class Jeu {
 		
 		String sProposition = String.valueOf(joueur.proposition);//On met la valeur de proposition dans un String
 		String sNombreMystere = String.valueOf(this.nombreMystere);//Idem avec NombreMystere
-		String resultat = "";//Ce string contiendra le résultat sous forme de + - =
+		resultat = "";
 		
 		for (int i = 0; i < longueurNombreMystere; i++) {
 			int chiffrePropose = Character.getNumericValue(sProposition.charAt(i));
@@ -119,6 +125,6 @@ public class Jeu {
 			else if (chiffrePropose == chiffreNombreMystere)
 				resultat += "=";
 		}
-		System.out.println("Résultat : "+resultat);
+		System.out.println("Résultat : "+resultat+"\n");
 	}
 }
