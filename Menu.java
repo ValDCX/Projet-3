@@ -16,7 +16,7 @@ public class Menu {
 		
 		//Si l'entrée clavier n'est pas un byte
 		if (!sc.hasNextByte()) {
-			erreurChoix();
+			Erreur.erreurChoix();
       sc.next(); 
       continue;
   }
@@ -34,19 +34,11 @@ public class Menu {
 		case 3: System.out.println("À bientôt !");//Quitter
 		break;
 		
-		default : erreurChoix();	
+		default : Erreur.erreurChoix();	
 	 }
 	} while (choix != 1 && choix != 2 && choix != 3);
  }
 	
 	//******Méthodes******
 	
-	//Message affiché si une entrée clavier ne correspond à aucun choix proposé 
-	public static void erreurChoix() {
-		System.out.println("\nVeuillez choisir parmi les propositions.");
-	}
-	
-	public static void erreurNombre() {
-		System.out.println("\nVeuillez entrer un nombre à "+Jeu.longueurNombreMystere+" chiffres.");
-	}
 }

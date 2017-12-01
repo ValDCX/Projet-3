@@ -1,16 +1,16 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Jeu {
+public abstract class Jeu {
 	
 	Joueur joueur1;
 	Joueur joueur2;
 	String nomDuJeu;
 	String resultat;
 	static int longueurNombreMystere = 4;
-	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
+	static int nombreUtilises[] = {0,1,2,3,4,5};
 	static int compteur;
-	long nombreMystere;
+	String nombreMystere = "";
 	
 	public Jeu(String nomDuJeu) {
 		
@@ -26,7 +26,7 @@ public class Jeu {
 			
 			//Si l'entrée clavier n'est pas un byte
 			if (!sc.hasNextByte()) {
-				Menu.erreurChoix();
+				Erreur.erreurChoix();
 	      sc.next(); 
 	      continue;
 		}
@@ -44,7 +44,7 @@ public class Jeu {
 			
 			case 4: break;
 		
-			default : Menu.erreurChoix();
+			default : Erreur.erreurChoix();
 			}
 		} while (choix != 1 && choix != 2 && choix != 3	&& choix !=4);
 	}
@@ -60,7 +60,7 @@ public class Jeu {
 		do {
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
-		} while (joueur1.proposition != nombreMystere);
+		} while (!String.valueOf(joueur1.proposition).equals(nombreMystere));
 		System.out.println("Bravo ! Vous avez trouvé le nombre mystère en "+compteur+" coups !");
 	}
 	
@@ -84,21 +84,13 @@ public class Jeu {
 		Random random = new Random();
 		
 		int chiffreNombreMystere[] = new int [longueurNombreMystere];
-		String sChiffre = "";
 		
 		for (int i = 0; i < longueurNombreMystere; i++) {//On génère un chiffre aléatoire jusqu'à atteindre la longueur définie dans longueurNombreMystere
 			chiffreNombreMystere[i] = random.nextInt(maximumPossible+1);
 			
-			sChiffre += chiffreNombreMystere[i];//On ajoute le chiffre généré au String sChiffre
+			nombreMystere += chiffreNombreMystere[i];
 		}
 		
-		//Si le premier chiffre aléatoire est un zéro, il est remplacé par un autre chiffre aléatoire entre 1 et maximumPossible (sinon il ne s'affichera pas)
-		if (sChiffre.charAt(0) == '0') {
-			int r = random.nextInt(maximumPossible-1)+1;
-			sChiffre = r+sChiffre.substring(1, sChiffre.length());
-		}
-		
-		nombreMystere = Long.parseLong((sChiffre));//On convertit sChiffre en Long dans nombreMystere
 		System.out.println(nombreMystere);
 	}
 	
@@ -111,12 +103,11 @@ public class Jeu {
 	public void comparerNombres(Joueur joueur) {
 		
 		String sProposition = String.valueOf(joueur.proposition);//On met la valeur de proposition dans un String
-		String sNombreMystere = String.valueOf(this.nombreMystere);//Idem avec NombreMystere
 		resultat = "";
 		
 		for (int i = 0; i < longueurNombreMystere; i++) {
 			int chiffrePropose = Character.getNumericValue(sProposition.charAt(i));
-			int chiffreNombreMystere = Character.getNumericValue(sNombreMystere.charAt(i));
+			int chiffreNombreMystere = Character.getNumericValue(nombreMystere.charAt(i));
 			
 			if (chiffrePropose > chiffreNombreMystere) 
 				resultat += "-";
