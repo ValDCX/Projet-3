@@ -6,7 +6,7 @@ public class Humain extends Joueur{
 		
 	}
 	
-	public static void proposerNombre() {
+	public void proposerNombre() {
 		Jeu.compteur++;
 		System.out.print("Proposition : ");
 		do {	

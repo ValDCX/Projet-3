@@ -20,10 +20,11 @@ public class PlusOuMoins extends Jeu{
 	
 	public void defenseur() {
 		System.out.println("********MODE DEFENSEUR********");
+		int nb;
 		compteur = 0;
-		genererNombreMystere();
 		joueur1 = new Humain();
 		joueur2 = new Ordinateur();
+		joueur1.proposerNombre();//L'utilisateur entre la combinaison à deviner
 		//A compléter
 	}
 	

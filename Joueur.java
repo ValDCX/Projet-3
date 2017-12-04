@@ -9,7 +9,7 @@ public abstract class Joueur {
 		
 	}
 
-	public static void proposerNombre() {
+	public void proposerNombre() {
 		
 	}
 }

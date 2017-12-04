@@ -8,8 +8,9 @@ public abstract class Jeu {
 	String nomDuJeu;
 	String resultat;
 	static int longueurNombreMystere = 4;
-	static int nombreUtilises[] = {0,1,2,3,4,5};
+	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	static int compteur;
+	static int coupsMax = 10;
 	String nombreMystere = "";
 	
 	public Jeu(String nomDuJeu) {
@@ -66,16 +67,12 @@ public abstract class Jeu {
 	//Génération du nombre mystère
 	public void genererNombreMystere() {
 		
-		int maximumPossible;
-		
-		maximumPossible = nombreUtilises.length-1;//On récupère le nombre maximum à être utilisé dans nombreUtilises
-		
 		Random random = new Random();
 		
 		int chiffreNombreMystere[] = new int [longueurNombreMystere];
 		
 		for (int i = 0; i < longueurNombreMystere; i++) {//On génère un chiffre aléatoire jusqu'à atteindre la longueur définie dans longueurNombreMystere
-			chiffreNombreMystere[i] = random.nextInt(maximumPossible+1);
+			chiffreNombreMystere[i] = random.nextInt(9+1);
 			
 			nombreMystere += chiffreNombreMystere[i];
 		}
