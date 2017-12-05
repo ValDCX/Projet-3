@@ -7,7 +7,6 @@ public class Humain extends Joueur{
 	}
 	
 	public void proposerNombre() {
-		Jeu.compteur++;
 		System.out.print("Proposition : ");
 		do {	
 			Scanner sc = new Scanner (System.in);

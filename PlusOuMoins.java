@@ -7,14 +7,16 @@ public class PlusOuMoins extends Jeu{
 	
 	public void challenger() {
 		System.out.println("********MODE CHALLENGER********");
-		compteur = 0;
+		compteur = 1;
 		genererNombreMystere();
 		joueur1 = new Humain();
 		//On boucle tant que le nombre mystère n'est pas trouvé
 		do {
+			System.out.println("Coup n°"+(compteur));
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
-		} while (!String.valueOf(joueur1.proposition).equals(nombreMystere) && compteur < coupsMax);
+			compteur++;
+		} while (!String.valueOf(joueur1.proposition).equals(nombreMystere) && compteur < coupsMax+1);
 		finPartie();
 	}
 	
