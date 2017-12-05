@@ -14,8 +14,8 @@ public class PlusOuMoins extends Jeu{
 		do {
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
-		} while (!String.valueOf(joueur1.proposition).equals(nombreMystere));
-		System.out.println("Bravo ! Vous avez trouvé le nombre mystère en "+compteur+" coups !");
+		} while (!String.valueOf(joueur1.proposition).equals(nombreMystere) && compteur < coupsMax);
+		finPartie();
 	}
 	
 	public void defenseur() {
