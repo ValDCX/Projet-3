@@ -6,12 +6,12 @@ public abstract class Jeu {
 	Joueur joueur1;
 	Joueur joueur2;
 	String nomDuJeu;
-	String resultat;
+	static String resultat;
 	static int longueurNombreMystere = 4;
 	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	static int compteur;
 	static int coupsMax = 2;
-	String nombreMystere = "";
+	static String nombreMystere = "";
 	
 	public Jeu(String nomDuJeu) {
 		
@@ -110,5 +110,12 @@ public abstract class Jeu {
 			System.out.println("Vous avez atteint la limite de coups ("+coupsMax+") ! Le nombre mystère était : "+nombreMystere+".");
 		else
 			System.out.println("Bravo ! Vous avez trouvé le nombre mystère en "+(compteur-1)+" coups !");
+	}
+	public void initCompteur() {
+		compteur = 1;
+	}
+	
+	public void afficherCompteur() {
+		System.out.println("Coup n°"+(compteur));
 	}
 }
