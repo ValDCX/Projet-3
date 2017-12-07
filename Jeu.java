@@ -10,7 +10,7 @@ public abstract class Jeu {
 	static int longueurNombreMystere = 4;
 	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	static int compteur;
-	static int coupsMax = 2;
+	static int coupsMax = 5;
 	static String nombreMystere = "";
 	
 	public Jeu(String nomDuJeu) {
@@ -66,7 +66,7 @@ public abstract class Jeu {
 	
 	//Génération du nombre mystère
 	public void genererNombreMystere() {
-		
+		nombreMystere = "";
 		Random random = new Random();
 		
 		int chiffreNombreMystere[] = new int [longueurNombreMystere];
@@ -88,7 +88,7 @@ public abstract class Jeu {
 	//Comparer la proposition du joueur au nombre mystère
 	public void comparerNombres(Joueur joueur) {
 		
-		String sProposition = String.valueOf(joueur.proposition);//On met la valeur de proposition dans un String
+		String sProposition = String.valueOf(Joueur.proposition);//On met la valeur de proposition dans un String
 		resultat = "";
 		
 		for (int i = 0; i < longueurNombreMystere; i++) {
@@ -105,11 +105,11 @@ public abstract class Jeu {
 		System.out.println("Résultat : "+resultat+"\n");
 	}
 	
-	public void finPartie() {
+	public void finPartie(String vainqueur) {
 		if (compteur >= coupsMax && !Joueur.proposition.equals(nombreMystere))
 			System.out.println("Vous avez atteint la limite de coups ("+coupsMax+") ! Le nombre mystère était : "+nombreMystere+".");
 		else
-			System.out.println("Bravo ! Vous avez trouvé le nombre mystère en "+(compteur-1)+" coups !");
+			System.out.println("Bravo ! "+vainqueur+" trouvé le nombre mystère en "+(compteur-1)+" coups !");
 	}
 	public void initCompteur() {
 		compteur = 1;
@@ -118,4 +118,6 @@ public abstract class Jeu {
 	public void afficherCompteur() {
 		System.out.println("Coup n°"+(compteur));
 	}
+
+
 }

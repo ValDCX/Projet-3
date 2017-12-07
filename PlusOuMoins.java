@@ -17,7 +17,7 @@ public class PlusOuMoins extends Jeu{
 			comparerNombres(joueur1);
 			compteur++;
 		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere) && compteur < coupsMax+1);
-		finPartie();
+		finPartie("Vous avez");
 	}
 	
 	public void defenseur() {
@@ -33,10 +33,10 @@ public class PlusOuMoins extends Jeu{
 			afficherCompteur();
 			joueur2.proposerNombre();
 			comparerNombres(joueur2);
+			joueur2.resultatPrecedent = resultat;
 			compteur++;
-		} while (!Joueur.proposition.equals(nombreMystere));
-		finPartie();
-		//A compléter
+		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere) && compteur < coupsMax+1);
+		finPartie("L'ordinateur a");
 	}
 	
 	public void duel() {
@@ -45,6 +45,19 @@ public class PlusOuMoins extends Jeu{
 		genererNombreMystere();
 		joueur1 = new Humain();
 		joueur2 = new Ordinateur();
-		//A compléter
+		
+		do {
+			afficherCompteur();
+			System.out.println("À vous : ");
+			joueur1.proposerNombre();
+			comparerNombres(joueur1);
+			
+			System.out.println("À l'ordinateur :");
+			joueur2.proposerNombre();
+			comparerNombres(joueur2);
+			joueur2.resultatPrecedent = resultat;
+			compteur++;
+		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere));
+		finPartie("Coucou");
 	}
 }
