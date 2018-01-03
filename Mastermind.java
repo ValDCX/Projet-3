@@ -1,6 +1,10 @@
 import java.util.Random;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Mastermind extends Jeu{
+	
+	HashSet liste = new HashSet();
 	
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
@@ -8,7 +12,7 @@ public class Mastermind extends Jeu{
 	}
 
 public void genererNombreMystere() {
-		
+	
 		int maximumPossible;
 		
 		maximumPossible = nombreUtilises.length-1;//On récupère le nombre maximum à être utilisé dans nombreUtilises
@@ -17,12 +21,15 @@ public void genererNombreMystere() {
 		
 		int chiffreNombreMystere[] = new int [longueurNombreMystere];
 		
-		for (int i = 0; i < longueurNombreMystere; i++) {//On génère un chiffre aléatoire jusqu'à atteindre la longueur définie dans longueurNombreMystere
-			chiffreNombreMystere[i] = random.nextInt(maximumPossible+1);
+		do {
+			for (int i = 0; i < longueurNombreMystere; i++) {//On génère un chiffre aléatoire jusqu'à atteindre la longueur définie dans longueurNombreMystere
+				chiffreNombreMystere[i] = random.nextInt(maximumPossible+1);
 			
-			nombreMystere += chiffreNombreMystere[i];
-		}
+				nombreMystere += chiffreNombreMystere[i];
+			}
+			liste.add(nombreMystere);
+		} while (liste.size() < Math.pow(nombreUtilises.length, longueurNombreMystere));//Tant que liste ne contient pas toutes les solutions possibles (nombre de chiffres puissance longueur du nombre)
 		
-		System.out.println(nombreMystere);
+		System.out.println("Fini ! longueur de liste : "+liste.size());
 	}
 }

@@ -1,3 +1,4 @@
+
 public abstract class Erreur {
 
 		//Message affiché si une entrée clavier ne correspond à aucun choix proposé 
