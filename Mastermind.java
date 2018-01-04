@@ -8,10 +8,16 @@ public class Mastermind extends Jeu{
 	
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
+		genererListeSolutions();
 		genererNombreMystere();
+		
+		if (liste.contains(nombreMystere))
+			System.out.println("Nombre trouvé !");
+		else
+			System.out.println("Nombre inconnu !");
 	}
 
-public void genererNombreMystere() {
+public void genererListeSolutions() {
 	
 		int maximumPossible;
 		
@@ -28,8 +34,10 @@ public void genererNombreMystere() {
 				nombreMystere += chiffreNombreMystere[i];
 			}
 			liste.add(nombreMystere);
+			nombreMystere = "";
 		} while (liste.size() < Math.pow(nombreUtilises.length, longueurNombreMystere));//Tant que liste ne contient pas toutes les solutions possibles (nombre de chiffres puissance longueur du nombre)
 		
-		System.out.println("Fini ! longueur de liste : "+liste.size());
+		System.out.println("Longueur de liste : "+liste.size());
 	}
+
 }

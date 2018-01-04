@@ -8,7 +8,7 @@ public abstract class Jeu {
 	String nomDuJeu;
 	static String resultat;
 	static int longueurNombreMystere = 5;
-	static int nombreUtilises[] = {0,1,2,3,4,5,6,7};
+	static int nombreUtilises[] = {0,1,2,3,4,5,6,7,8,9};
 	static int compteur;
 	static int coupsMax = 5;
 	static String nombreMystere = "";
@@ -77,7 +77,7 @@ public abstract class Jeu {
 			nombreMystere += chiffreNombreMystere[i];
 		}
 		
-		System.out.println(nombreMystere);
+		System.out.println("Nombre mystère :"+nombreMystere);
 	}
 	
 	//Retourner le nom du jeu sélectionné
