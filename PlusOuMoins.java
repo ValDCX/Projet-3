@@ -51,7 +51,7 @@ public class PlusOuMoins extends Jeu{
 			System.out.println("À vous : ");
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
-			
+
 			System.out.println("À l'ordinateur :");
 			joueur2.proposerNombre();
 			comparerNombres(joueur2);
