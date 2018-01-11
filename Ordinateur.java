@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ordinateur extends Joueur{
@@ -46,5 +47,11 @@ public class Ordinateur extends Joueur{
 			tourPrecedent = proposition;
 			System.out.println(proposition);
 		}
+	}
+	
+	public void piocherDansListe(ArrayList liste) {
+		Random random = new Random();
+		int index = random.nextInt(liste.size());
+		proposition = (String)liste.get(index);
 	}
 }

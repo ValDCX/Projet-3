@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public abstract class Joueur {
 	
@@ -10,6 +11,10 @@ public abstract class Joueur {
 	}
 
 	public void proposerNombre() {
+		
+	}
+	
+	public void piocherDansListe(ArrayList liste) {
 		
 	}
 }

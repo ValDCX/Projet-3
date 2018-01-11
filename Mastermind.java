@@ -1,13 +1,12 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class Mastermind extends Jeu{
 	
 	HashSet liste; //Set qui contiendra toutes les solutions possibles sans doublon
 	byte bienPlaces = 0;
 	byte presents = 0;
-	ArrayList aListe;
+	ArrayList aListe; //ArrayList identique au set liste, mais plus modulable pour supprimer les solutions erronées au cours de la partie
+	ListIterator iterator = aListe.listIterator();
 	
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
@@ -22,7 +21,7 @@ public class Mastermind extends Jeu{
 		joueur1 = new Humain();
 		//On boucle tant que le nombre mystère n'est pas trouvé
 		do {
-			resetCompteurs();
+			resetIndices();
 			afficherCompteur();
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
@@ -33,7 +32,24 @@ public class Mastermind extends Jeu{
 	
 	public void defenseur() {
 		System.out.println("********MODE DEFENSEUR********");
-
+		initCompteur();
+		genererListeSolutions();
+		joueur1 = new Humain();
+		joueur2 = new Ordinateur();
+		joueur1.proposerNombre();
+		nombreMystere = Joueur.proposition;
+		System.out.println("Le nombre mystère est "+nombreMystere);
+		do {
+			resetIndices();
+			afficherCompteur();
+			joueur2.piocherDansListe(aListe);
+			System.out.println(Joueur.proposition);
+			comparerNombres(joueur2);
+			clean();
+			System.out.println("Longueur de liste : "+aListe.size());
+			compteur++;
+		}while (bienPlaces < nombreMystere.length());
+		finPartie("L'ordinateur a");
 	}
 	
 	public void duel() {
@@ -89,14 +105,18 @@ public class Mastermind extends Jeu{
 	System.out.println(presents+" présents et "+bienPlaces+" bien placés.");
 }
 
-	public void genererNombreMystere(){
+	public void genererNombreMystere() {
 	Random random = new Random();
 	int index = random.nextInt(aListe.size());
 	nombreMystere = (String)aListe.get(index);
 	}
 	
-	public void resetCompteurs() {
+	public void resetIndices() {
 		presents = 0;
 		bienPlaces = 0;
+	}
+	
+	public void clean() {
+		aListe.remove(Joueur.proposition);
 	}
 }
