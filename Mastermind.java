@@ -4,30 +4,45 @@ import java.util.Random;
 
 public class Mastermind extends Jeu{
 	
-	HashSet liste = new HashSet();
+	HashSet liste; //Set qui contiendra toutes les solutions possibles sans doublon
 	byte bienPlaces = 0;
-	byte malPlaces = 0;
+	byte presents = 0;
 	ArrayList aListe;
 	
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
-		joueur1 = new Ordinateur();
-		genererListeSolutions();
-		aListe = new ArrayList(liste);
-		genererNombreMystere();
-		System.out.println(nombreMystere);
-		joueur1.proposition = "12345";
-		System.out.println("Proposition : "+joueur1.proposition);
-		comparerNombres(joueur1);
-		
-		if (aListe.contains(nombreMystere))
-			System.out.println("Nombre trouvé !");
-		else
-			System.out.println("Nombre inconnu !");
 	}
 
-public void genererListeSolutions() {
+	public void challenger() {
+		System.out.println("********MODE CHALLENGER********");
+		initCompteur();
+		genererListeSolutions();
+		genererNombreMystere();
+		System.out.println(nombreMystere);
+		joueur1 = new Humain();
+		//On boucle tant que le nombre mystère n'est pas trouvé
+		do {
+			resetCompteurs();
+			afficherCompteur();
+			joueur1.proposerNombre();
+			comparerNombres(joueur1);
+			compteur++;
+		} while (bienPlaces < nombreMystere.length());
+		finPartie("Vous avez");
+	}
 	
+	public void defenseur() {
+		System.out.println("********MODE DEFENSEUR********");
+
+	}
+	
+	public void duel() {
+		System.out.println("********MODE DUEL********");
+	}
+	
+	public void genererListeSolutions() {
+	
+		liste = new HashSet();
 		int maximumPossible;
 		
 		maximumPossible = nombreUtilises.length-1;//On récupère le nombre maximum à être utilisé dans nombreUtilises
@@ -45,11 +60,12 @@ public void genererListeSolutions() {
 			liste.add(nombreMystere);
 			nombreMystere = "";
 		} while (liste.size() < Math.pow(nombreUtilises.length, longueurNombreMystere));//Tant que liste ne contient pas toutes les solutions possibles (nombre de chiffres puissance longueur du nombre)
-		
+
+		aListe = new ArrayList(liste);
 		System.out.println("Longueur de liste : "+liste.size());
 	}
 
-public void comparerNombres(Joueur joueur) {
+	public void comparerNombres(Joueur joueur) {
 	
 	String sProposition = String.valueOf(joueur.proposition);//On met la valeur de proposition dans un String
 	
@@ -60,20 +76,27 @@ public void comparerNombres(Joueur joueur) {
 		if (chiffrePropose == chiffreNombreMystere)
 			bienPlaces++;
 		else if (nombreMystere.contains(String.valueOf(chiffrePropose)))
-			malPlaces++;
+			presents++;
 		else;
 	}
 	//Comptabilise les chiffres présents et mal placés. ****************A VERIFIER /!\******************
-	if (malPlaces >= nombreMystere.length())
-	malPlaces -= bienPlaces;
-	if (malPlaces < 0)
-		malPlaces = 0;
-	System.out.println(malPlaces+" mal placés et "+bienPlaces+" bien placés.");
+	if (presents >= nombreMystere.length())
+	presents -= bienPlaces;
+	if (presents < 0)
+		presents = 0;
+	if (bienPlaces == nombreMystere.length())
+		presents = 0;
+	System.out.println(presents+" présents et "+bienPlaces+" bien placés.");
 }
 
-public void genererNombreMystere(){
+	public void genererNombreMystere(){
 	Random random = new Random();
 	int index = random.nextInt(aListe.size());
 	nombreMystere = (String)aListe.get(index);
+	}
+	
+	public void resetCompteurs() {
+		presents = 0;
+		bienPlaces = 0;
 	}
 }
