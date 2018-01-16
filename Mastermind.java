@@ -5,6 +5,8 @@ public class Mastermind extends Jeu {
 	HashSet liste; // Set qui contiendra toutes les solutions possibles sans doublon
 	byte bienPlaces = 0;
 	byte presents = 0;
+	int resultatOK = 0;
+	int resultatMP = 0;
 	ArrayList aListe; // ArrayList identique au set liste, mais plus modulable pour supprimer les
 										// solutions erronées au cours de la partie
 	ListIterator iterator = aListe.listIterator();
@@ -26,6 +28,7 @@ public class Mastermind extends Jeu {
 			afficherCompteur();
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
+			afficherResultat();
 			compteur++;
 		} while (bienPlaces < nombreMystere.length());
 		finPartie("Vous avez");
@@ -46,10 +49,11 @@ public class Mastermind extends Jeu {
 			joueur2.piocherDansListe(aListe);
 			System.out.println(Joueur.proposition);
 			comparerNombres(joueur2);
+			afficherResultat();
+			enregistrerResultat();
 			clean();
-			System.out.println("Longueur de liste : " + aListe.size());
 			compteur++;
-		} while (bienPlaces < nombreMystere.length());
+		} while (resultatOK < nombreMystere.length());
 		finPartie("L'ordinateur a");
 	}
 
@@ -101,8 +105,10 @@ public class Mastermind extends Jeu {
 			else
 				;
 		}
-		// Comptabilise les chiffres présents et mal placés. ****************A VERIFIER
-		// /!\******************
+		
+	}
+	
+	public void afficherResultat() {
 		if (presents >= nombreMystere.length())
 			presents -= bienPlaces;
 		if (presents < 0)
@@ -125,5 +131,34 @@ public class Mastermind extends Jeu {
 
 	public void clean() {
 		aListe.remove(Joueur.proposition);
+		
+		for (int i = 0; i < aListe.size(); i++) {//Tant que la liste complète n'est pas parcourue
+			
+			String sNombre = String.valueOf(aListe.get(i));
+
+			for (int n = 0; n < longueurNombreMystere; n++) {
+				int chiffreNombreMystere = Character.getNumericValue(nombreMystere.charAt(n));
+				int chiffreSolutionPotentielle = Character.getNumericValue(sNombre.charAt(n));
+
+				if (chiffreSolutionPotentielle == chiffreNombreMystere)
+					bienPlaces++;
+				else if (nombreMystere.contains(String.valueOf(chiffreSolutionPotentielle)))
+					presents++;
+				else
+					;
+			}
+			if (bienPlaces < resultatOK) {
+				aListe.remove(aListe.get(i));
+				resetIndices();
+			}
+			else
+				resetIndices();
+		}
+		System.out.println("Longueur de liste : "+aListe.size());
+	}
+	
+	public void enregistrerResultat() {
+		resultatOK = bienPlaces;
+		resultatMP = presents;
 	}
 }

@@ -10,7 +10,7 @@ public abstract class Jeu {
 	static int longueurNombreMystere = 5;
 	static int nombreUtilises[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	static int compteur;
-	static int coupsMax = 5;
+	static int coupsMax = 99999;
 	static String nombreMystere = "";
 
 	public Jeu(String nomDuJeu) {
