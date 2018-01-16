@@ -147,10 +147,13 @@ public class Mastermind extends Jeu {
 				else
 					;
 			}
-			if (bienPlaces < resultatOK) {
+			if (bienPlaces <= resultatOK) {
 				aListe.remove(aListe.get(i));
 				resetIndices();
+				if (!aListe.contains(nombreMystere))
+					aListe.add(nombreMystere);
 			}
+
 			else
 				resetIndices();
 		}
