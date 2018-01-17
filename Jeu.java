@@ -116,7 +116,7 @@ public abstract class Jeu {
 			System.out.println(
 					"Vous avez atteint la limite de coups (" + coupsMax + ") ! Le nombre mystère était : " + nombreMystere + ".");
 		else
-			System.out.println("Bravo ! " + vainqueur + " trouvé le nombre mystère en " + (compteur - 1) + " coups !");
+			System.out.println("Bravo ! " + vainqueur + " trouvé le nombre mystère en " + (compteur-1) + " coups !");
 	}
 
 	public void initCompteur() {
