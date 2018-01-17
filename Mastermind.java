@@ -59,6 +59,32 @@ public class Mastermind extends Jeu {
 
 	public void duel() {
 		System.out.println("********MODE DUEL********");
+		initCompteur();
+		genererListeSolutions();
+		genererNombreMystere();
+		joueur1 = new Humain();
+		joueur2 = new Ordinateur();
+		
+		do {
+			resetIndices();
+			System.out.println("À vous :");
+			afficherCompteur();
+			joueur1.proposerNombre();
+			comparerNombres(joueur1);
+			afficherResultat();
+
+			System.out.println("À l'ordinateur :");
+			resetIndices();
+			afficherCompteur();
+			joueur2.piocherDansListe(aListe);
+			System.out.println(Joueur.proposition);
+			comparerNombres(joueur2);
+			afficherResultat();
+			enregistrerResultat();
+			clean();
+			compteur++;
+		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere));
+		finPartie("Coucou");
 	}
 
 	public void genererListeSolutions() {
