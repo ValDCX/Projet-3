@@ -59,20 +59,30 @@ public class Mastermind extends Jeu {
 
 	public void duel() {
 		System.out.println("********MODE DUEL********");
+		String combinaisonJoueur1, combinaisonJoueur2;
 		initCompteur();
 		genererListeSolutions();
 		genererNombreMystere();
+		combinaisonJoueur1 = nombreMystere;//On stocke le nombre à deviner par le joueur ici
 		joueur1 = new Humain();
+		joueur1.proposerNombre();//L'utilisateur entre la combinaison à deviner pour l'ordinateur
+		combinaisonJoueur2 = Joueur.proposition;//Cette combinaison est stockée ici
 		joueur2 = new Ordinateur();
 		
 		do {
 			resetIndices();
+			nombreMystere = combinaisonJoueur1;
 			System.out.println("À vous :");
 			afficherCompteur();
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
 			afficherResultat();
-
+			if (String.valueOf(Joueur.proposition).equals(nombreMystere)) {
+				compteur++;
+				break;
+			}
+			
+			nombreMystere = combinaisonJoueur2;
 			System.out.println("À l'ordinateur :");
 			resetIndices();
 			afficherCompteur();
@@ -84,7 +94,10 @@ public class Mastermind extends Jeu {
 			clean();
 			compteur++;
 		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere));
-		finPartie("Coucou");
+		if (nombreMystere == combinaisonJoueur1)
+			finPartie("Vous avez");
+		else if (nombreMystere == combinaisonJoueur2)
+			finPartie("L'ordinateur a");
 	}
 
 	public void genererListeSolutions() {
