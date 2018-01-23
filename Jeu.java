@@ -82,8 +82,6 @@ public abstract class Jeu {
 
 			nombreMystere += chiffreNombreMystere[i];
 		}
-
-		System.out.println("Nombre mystère :" + nombreMystere);
 	}
 
 	// Retourner le nom du jeu sélectionné

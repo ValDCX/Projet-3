@@ -126,7 +126,6 @@ public class Mastermind extends Jeu {
 																																										// longueur du nombre)
 
 		aListe = new ArrayList(liste);
-		System.out.println("Longueur de liste : " + liste.size());
 	}
 
 	public void comparerNombres(Joueur joueur) {
@@ -196,7 +195,6 @@ public class Mastermind extends Jeu {
 			else
 				resetIndices();
 		}
-		System.out.println("Longueur de liste : "+aListe.size());
 	}
 	
 	public void enregistrerResultat() {
