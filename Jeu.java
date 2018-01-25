@@ -18,24 +18,23 @@ public abstract class Jeu {
 	static String nombreMystere = "";
 	Properties prop = new Properties();
 	InputStream input = null;
-	
+
 	public Jeu(String nomDuJeu) {
-		
 
 		try {
 
 			input = new FileInputStream("config.properties");
 
-			//Chargement du fichier config
+			// Chargement du fichier config
 			prop.load(input);
-			
+
 			longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurPlusOuMoins"));
 			coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
-			nombreUtilises = new int [Integer.valueOf(prop.getProperty("couleurs"))];
+			nombreUtilises = new int[Integer.valueOf(prop.getProperty("couleurs"))];
 			for (int i = 0; i < Integer.valueOf(prop.getProperty("couleurs")); i++) {
-				nombreUtilises[i]	= i;
+				nombreUtilises[i] = i;
 			}
-			System.out.println(longueurNombreMystere+" "+coupsMax);
+			System.out.println(longueurNombreMystere + " " + coupsMax);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -148,7 +147,7 @@ public abstract class Jeu {
 			System.out.println(
 					"Vous avez atteint la limite de coups (" + coupsMax + ") ! Le nombre mystère était : " + nombreMystere + ".");
 		else
-			System.out.println("Bravo ! " + vainqueur + " trouvé le nombre mystère en " + (compteur-1) + " coups !");
+			System.out.println("Bravo ! " + vainqueur + " trouvé le nombre mystère en " + (compteur - 1) + " coups !");
 	}
 
 	public void initCompteur() {

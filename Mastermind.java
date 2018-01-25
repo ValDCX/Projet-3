@@ -64,12 +64,12 @@ public class Mastermind extends Jeu {
 		initCompteur();
 		genererListeSolutions();
 		genererNombreMystere();
-		combinaisonJoueur1 = nombreMystere;//On stocke le nombre à deviner par le joueur ici
+		combinaisonJoueur1 = nombreMystere;// On stocke le nombre à deviner par le joueur ici
 		joueur1 = new Humain();
-		joueur1.proposerNombre();//L'utilisateur entre la combinaison à deviner pour l'ordinateur
-		combinaisonJoueur2 = Joueur.proposition;//Cette combinaison est stockée ici
+		joueur1.proposerNombre();// L'utilisateur entre la combinaison à deviner pour l'ordinateur
+		combinaisonJoueur2 = Joueur.proposition;// Cette combinaison est stockée ici
 		joueur2 = new Ordinateur();
-		
+
 		do {
 			resetIndices();
 			nombreMystere = combinaisonJoueur1;
@@ -82,7 +82,7 @@ public class Mastermind extends Jeu {
 				compteur++;
 				break;
 			}
-			
+
 			nombreMystere = combinaisonJoueur2;
 			System.out.println("À l'ordinateur :");
 			resetIndices();
@@ -144,9 +144,9 @@ public class Mastermind extends Jeu {
 			else
 				;
 		}
-		
+
 	}
-	
+
 	public void afficherResultat() {
 		if (presents >= nombreMystere.length())
 			presents -= bienPlaces;
@@ -170,9 +170,9 @@ public class Mastermind extends Jeu {
 
 	public void clean() {
 		aListe.remove(Joueur.proposition);
-		
-		for (int i = 0; i < aListe.size(); i++) {//Tant que la liste complète n'est pas parcourue
-			
+
+		for (int i = 0; i < aListe.size(); i++) {// Tant que la liste complète n'est pas parcourue
+
 			String sNombre = String.valueOf(aListe.get(i));
 
 			for (int n = 0; n < longueurNombreMystere; n++) {
@@ -197,7 +197,7 @@ public class Mastermind extends Jeu {
 				resetIndices();
 		}
 	}
-	
+
 	public void enregistrerResultat() {
 		resultatOK = bienPlaces;
 		resultatMP = presents;
