@@ -9,10 +9,11 @@ public class Mastermind extends Jeu {
 	int resultatMP = 0;
 	ArrayList aListe; // ArrayList identique au set liste, mais plus modulable pour supprimer les
 										// solutions erronées au cours de la partie
-	ListIterator iterator = aListe.listIterator();
 
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
+		longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurMastermind"));
+		coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
 	}
 
 	public void challenger() {

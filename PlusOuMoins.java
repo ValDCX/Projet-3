@@ -1,8 +1,12 @@
+import java.io.*;
+import java.util.*;
 
 public class PlusOuMoins extends Jeu{
 
 	public PlusOuMoins() {
 		super("\n*****PLUS OU MOINS*****");
+		longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurPlusOuMoins"));
+		coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
 	}
 	
 	public void challenger() {

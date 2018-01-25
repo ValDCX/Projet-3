@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,12 +12,42 @@ public abstract class Jeu {
 	String nomDuJeu;
 	static String resultat;
 	static int longueurNombreMystere = 5;
-	static int nombreUtilises[] = { 0, 1, 2, 3, 4, 5, 6, 7 ,8, 9 };
+	static int nombreUtilises[];
 	static int compteur;
 	static int coupsMax = 99999;
 	static String nombreMystere = "";
-
+	Properties prop = new Properties();
+	InputStream input = null;
+	
 	public Jeu(String nomDuJeu) {
+		
+
+		try {
+
+			input = new FileInputStream("config.properties");
+
+			//Chargement du fichier config
+			prop.load(input);
+			
+			longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurPlusOuMoins"));
+			coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
+			nombreUtilises = new int [Integer.valueOf(prop.getProperty("couleurs"))];
+			for (int i = 0; i < Integer.valueOf(prop.getProperty("couleurs")); i++) {
+				nombreUtilises[i]	= i;
+			}
+			System.out.println(longueurNombreMystere+" "+coupsMax);
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		this.nomDuJeu = nomDuJeu;
 		byte choix = 0;
