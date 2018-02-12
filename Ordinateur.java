@@ -1,15 +1,18 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 public class Ordinateur extends Joueur {
 
+	private static Logger logger = Logger.getLogger(Main.class);
 	String tourPrecedent = "";
 
 	public Ordinateur() {
 
 	}
 
-	public void proposerNombre() {
+	public void proposerNombre() { // Méthode utilisée dans PlusOuMoins
 		System.out.print("Proposition : ");
 
 		if (Jeu.compteur == 1) {
@@ -45,11 +48,13 @@ public class Ordinateur extends Joueur {
 			tourPrecedent = proposition;
 			System.out.println(proposition);
 		}
+		logger.info("Nombre proposé : "+proposition);
 	}
 
-	public void piocherDansListe(ArrayList liste) {
+	public void piocherDansListe(ArrayList liste) { // Méthode utilisée dans Mastermind
 		Random random = new Random();
 		int index = random.nextInt(liste.size());
 		proposition = (String) liste.get(index);
+		logger.info("Nombre proposé parmi la liste de solutions : "+proposition);
 	}
 }

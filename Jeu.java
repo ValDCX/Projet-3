@@ -5,16 +5,21 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+
 public abstract class Jeu {
 
+	private static Logger logger = Logger.getLogger(Main.class);
+	
 	Joueur joueur1;
 	Joueur joueur2;
 	String nomDuJeu;
 	static String resultat;
-	static int longueurNombreMystere = 5;
+	static int longueurNombreMystere;
 	static int nombreUtilises[];
 	static int compteur;
-	static int coupsMax = 99999;
+	static int coupsMax;
 	static String nombreMystere = "";
 	Properties prop = new Properties();
 	InputStream input = null;
@@ -34,7 +39,6 @@ public abstract class Jeu {
 			for (int i = 0; i < Integer.valueOf(prop.getProperty("couleurs")); i++) {
 				nombreUtilises[i] = i;
 			}
-			System.out.println(longueurNombreMystere + " " + coupsMax);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -115,6 +119,7 @@ public abstract class Jeu {
 
 			nombreMystere += chiffreNombreMystere[i];
 		}
+		logger.info("Nombre mystère généré : "+nombreMystere);
 	}
 
 	// Retourner le nom du jeu sélectionné
@@ -139,10 +144,12 @@ public abstract class Jeu {
 			else if (chiffrePropose == chiffreNombreMystere)
 				resultat += "=";
 		}
-		System.out.println("Résultat : " + resultat + "\n");
+		System.out.println("Résultat : " + resultat + "\n\n--------\n");
+		logger.info("Nombres comparés, résultat : "+resultat);
 	}
 
 	public void finPartie(String vainqueur) {
+		logger.info("Partie terminée");
 		if (compteur >= coupsMax && !Joueur.proposition.equals(nombreMystere))
 			System.out.println(
 					"Vous avez atteint la limite de coups (" + coupsMax + ") ! Le nombre mystère était : " + nombreMystere + ".");
@@ -151,10 +158,12 @@ public abstract class Jeu {
 	}
 
 	public void initCompteur() {
+		logger.info("Compteur de coups initialisé");
 		compteur = 1;
 	}
 
 	public void afficherCompteur() {
+		logger.info("Affichage du compteur de coups (coup n°"+compteur+")");
 		System.out.println("Coup n°" + (compteur));
 	}
 

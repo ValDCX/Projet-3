@@ -1,7 +1,11 @@
 import java.util.*;
 
+import org.apache.log4j.Logger;
+
 public class Mastermind extends Jeu {
 
+	private static Logger logger = Logger.getLogger(Main.class);
+	
 	HashSet liste; // Set qui contiendra toutes les solutions possibles sans doublon
 	byte bienPlaces = 0;
 	byte presents = 0;
@@ -12,17 +16,20 @@ public class Mastermind extends Jeu {
 
 	public Mastermind() {
 		super("\n*****MASTERMIND*****");
+		logger.info("Mastermind lancé");
 		longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurMastermind"));
 		coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
+		logger.info("Longueur du nombre mystère et nombre de coups max autorisé récupérés dans config.properties");
 	}
 
 	public void challenger() {
+		logger.info("Mode challenger lancé");
 		System.out.println("********MODE CHALLENGER********");
 		initCompteur();
 		genererListeSolutions();
 		genererNombreMystere();
-		System.out.println(nombreMystere);
 		joueur1 = new Humain();
+		logger.info("Joueur 1 défini comme humain");
 		// On boucle tant que le nombre mystère n'est pas trouvé
 		do {
 			resetIndices();
@@ -31,16 +38,19 @@ public class Mastermind extends Jeu {
 			comparerNombres(joueur1);
 			afficherResultat();
 			compteur++;
-		} while (bienPlaces < nombreMystere.length());
+		} while (bienPlaces < nombreMystere.length()&& compteur < coupsMax + 1);
 		finPartie("Vous avez");
 	}
 
 	public void defenseur() {
+		logger.info("Mode défenseur lancé");
 		System.out.println("********MODE DEFENSEUR********");
 		initCompteur();
 		genererListeSolutions();
 		joueur1 = new Humain();
+		logger.info("Joueur 1 défini comme humain");
 		joueur2 = new Ordinateur();
+		logger.info("Joueur 2 défini comme ordinateur");
 		joueur1.proposerNombre();
 		nombreMystere = Joueur.proposition;
 		System.out.println("Le nombre mystère est " + nombreMystere);
@@ -54,11 +64,12 @@ public class Mastermind extends Jeu {
 			enregistrerResultat();
 			clean();
 			compteur++;
-		} while (resultatOK < nombreMystere.length());
+		} while (resultatOK < nombreMystere.length()&& compteur < coupsMax + 1);
 		finPartie("L'ordinateur a");
 	}
 
 	public void duel() {
+		logger.info("Mode duel lancé");
 		System.out.println("********MODE DUEL********");
 		String combinaisonJoueur1, combinaisonJoueur2;
 		initCompteur();
@@ -66,9 +77,11 @@ public class Mastermind extends Jeu {
 		genererNombreMystere();
 		combinaisonJoueur1 = nombreMystere;// On stocke le nombre à deviner par le joueur ici
 		joueur1 = new Humain();
+		logger.info("Joueur 1 défini comme humain");
 		joueur1.proposerNombre();// L'utilisateur entre la combinaison à deviner pour l'ordinateur
 		combinaisonJoueur2 = Joueur.proposition;// Cette combinaison est stockée ici
 		joueur2 = new Ordinateur();
+		logger.info("Joueur 2 défini comme ordinateur");
 
 		do {
 			resetIndices();
@@ -94,7 +107,7 @@ public class Mastermind extends Jeu {
 			enregistrerResultat();
 			clean();
 			compteur++;
-		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere));
+		} while (!String.valueOf(Joueur.proposition).equals(nombreMystere)&& compteur < coupsMax + 1);
 		if (nombreMystere == combinaisonJoueur1)
 			finPartie("Vous avez");
 		else if (nombreMystere == combinaisonJoueur2)
@@ -127,6 +140,7 @@ public class Mastermind extends Jeu {
 																																										// longueur du nombre)
 
 		aListe = new ArrayList(liste);
+		logger.info("Liste des solutions possibles générée");
 	}
 
 	public void comparerNombres(Joueur joueur) {
@@ -144,7 +158,7 @@ public class Mastermind extends Jeu {
 			else
 				;
 		}
-
+		logger.info("Comparaison de la proposition de "+joueur+" ("+joueur.proposition+") avec le nombre mystère ("+nombreMystere+")");
 	}
 
 	public void afficherResultat() {
@@ -154,18 +168,21 @@ public class Mastermind extends Jeu {
 			presents = 0;
 		if (bienPlaces == nombreMystere.length())
 			presents = 0;
-		System.out.println(presents + " présents et " + bienPlaces + " bien placés.");
+		System.out.println(presents + " présents et " + bienPlaces + " bien placés.\n\n--------\n");
+		logger.info(presents + " présents et " +bienPlaces+ " bien placés");
 	}
 
 	public void genererNombreMystere() {
 		Random random = new Random();
 		int index = random.nextInt(aListe.size());
 		nombreMystere = (String) aListe.get(index);
+		logger.info("Nombre mystère choisi parmi la liste de solutions");
 	}
 
 	public void resetIndices() {
 		presents = 0;
 		bienPlaces = 0;
+		logger.info("Indices remis à zéro");
 	}
 
 	public void clean() {
@@ -196,6 +213,7 @@ public class Mastermind extends Jeu {
 			else
 				resetIndices();
 		}
+		logger.info("Combinaisons erronées retirées de la liste de solutions");
 	}
 
 	public void enregistrerResultat() {

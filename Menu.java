@@ -1,9 +1,12 @@
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 public class Menu {
+	
+	private static Logger logger = Logger.getLogger(Main.class);
 
 	public Menu() {
-
+		logger.info("Affichage du menu");
 		byte choix = 0;
 		System.out.println("Bonjour !");
 
@@ -35,6 +38,7 @@ public class Menu {
 
 			case 3:
 				System.out.println("À bientôt !");// Quitter
+				logger.info("Fermeture du jeu");
 				break;
 
 			default:

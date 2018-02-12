@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class Humain extends Joueur {
+	private static Logger logger = Logger.getLogger(Main.class);
 
 	public Humain() {
 
@@ -25,5 +28,6 @@ public class Humain extends Joueur {
 																																																	// chiffres que le
 																																																	// paramètre
 																																																	// longueurNombreMystere
+	logger.info("Nombre proposé : "+proposition);
 	}
 }

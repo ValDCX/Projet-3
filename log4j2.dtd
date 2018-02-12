@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Appenders (Console?, File)>
+
+<!ELEMENT Loggers (Root)>
+
+<!ELEMENT Console (PatternLayout)>
+<!ATTLIST Console name ID #REQUIRED>
+<!ATTLIST Console target CDATA #REQUIRED>
+
+<!ELEMENT File (PatternLayout)>
+<!ATTLIST File name ID #REQUIRED>
+<!ATTLIST File fileName CDATA #REQUIRED>
+<!ATTLIST File immediateFlush (true|false) #IMPLIED>
+<!ATTLIST File append (true|false) #IMPLIED>
+
+<!ELEMENT Root (AppenderRef+)>
+<!ATTLIST Root debug (ALL|TRACE|DEBUG|INFO|WARN|ERROR|FATAL|OFF) #REQUIRED>
+
+<!ELEMENT PatternLayout (#EMPTY)>
+<!ATTLIST PatternLayout pattern CDATA #REQUIRED>
+
+<!ELEMENT AppenderRef (#EMPTY)>
+<!ATTLIST Root debug (Console|MyFile) #REQUIRED>

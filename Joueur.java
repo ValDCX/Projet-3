@@ -10,11 +10,11 @@ public abstract class Joueur {
 
 	}
 
-	public void proposerNombre() {
+	public void proposerNombre() { // Proposer un nombre
 
 	}
 
-	public void piocherDansListe(ArrayList liste) {
+	public void piocherDansListe(ArrayList liste) { // Proposer un nombre à partir d'une liste de solutions potentielles
 
 	}
 }
