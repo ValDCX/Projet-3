@@ -9,8 +9,8 @@ public class Menu {
 	InputStream input = null;
 	static int devMode;
 
-	public Menu(int modDev) {
-		devMode = modDev;
+	public Menu( ) {
+		
 		logger.info("Affichage du menu");
 		byte choix = 0;
 		System.out.println("Bonjour !");

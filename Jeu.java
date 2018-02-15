@@ -167,7 +167,7 @@ public abstract class Jeu {
 	}
 	
 	public void devMode() {
-		if (Menu.devMode == 1)
+		if (Main.modDev == 1)
 		{
 			System.out.println("[Mode développeur] Le nombre mystère est : "+nombreMystere);
 		}
