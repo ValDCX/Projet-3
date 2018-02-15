@@ -11,7 +11,6 @@ public abstract class Jeu {
 
 	private static Logger logger = Logger.getLogger(Main.class);
 	
-	static int devMode;
 	Joueur joueur1;
 	Joueur joueur2;
 	String nomDuJeu;
@@ -168,7 +167,7 @@ public abstract class Jeu {
 	}
 	
 	public void devMode() {
-		if (devMode == 1)
+		if (Menu.devMode == 1)
 		{
 			System.out.println("[Mode développeur] Le nombre mystère est : "+nombreMystere);
 		}

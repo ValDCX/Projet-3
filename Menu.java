@@ -7,36 +7,18 @@ public class Menu {
 	private static Logger logger = Logger.getLogger(Main.class);
 	Properties prop = new Properties();
 	InputStream input = null;
+	static int devMode;
 
-	public Menu() {
+	public Menu(int modDev) {
+		devMode = modDev;
 		logger.info("Affichage du menu");
 		byte choix = 0;
 		System.out.println("Bonjour !");
 
-		try { //Chargement du paramètre du mode développeur
-
-			input = new FileInputStream("config.properties");
-
-			prop.load(input);
-
-			Jeu.devMode = Integer.valueOf(prop.getProperty("modeDeveloppeur"));
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
 		do {
 
 			System.out.println("\nÀ quoi souhaitez-vous jouer ?");
-			System.out.println("\n1· Plus ou moins \n2· Mastermind \n3· Mode développeur \n4· Quitter");
+			System.out.println("\n1· Plus ou moins \n2· Mastermind \n3· Quitter");
 
 			Scanner sc = new Scanner(System.in);
 
@@ -60,20 +42,6 @@ public class Menu {
 				break;
 
 			case 3:
-				if (Jeu.devMode == 1) {
-					Jeu.devMode = 0;
-					System.out.println("Mode développeur désactivé.");
-					logger.info("Mode développeur désactivé");
-					choix = 0;
-				} else {
-					Jeu.devMode = 1;
-					System.out.println("Mode développeur activé. La combinaison mystère sera affichée à chaque début de tour.");
-					logger.info("Mode développeur activé");
-					choix = 0;
-				}
-				break;
-
-			case 4:
 				System.out.println("À bientôt !");// Quitter
 				logger.info("Fermeture du jeu");
 				break;

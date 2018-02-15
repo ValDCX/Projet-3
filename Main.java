@@ -10,9 +10,11 @@ import org.apache.log4j.Logger;
 public class Main {
 
 	private static Logger logger = Logger.getLogger(Main.class);
+	public static boolean argument;
 
 	public static void main(String[] args) {
 		logger.info("Jeu lancé");
+		int modDev;
 		Properties prop = new Properties();
 		InputStream input = null;
 		OutputStream output = null;
@@ -60,7 +62,13 @@ public class Main {
 				}
 			}
 		}
+
+		if (args.length > 0)
+			modDev = Integer.parseInt(args[0]);
+		else
+			modDev = Integer.valueOf(prop.getProperty("modeDeveloppeur"));
+
 		// On lance le menu pour choisir le jeu
-		Menu menu = new Menu();
+		Menu menu = new Menu(modDev);
 	}
 }
