@@ -189,7 +189,7 @@ public class Mastermind extends Jeu {
 		logger.info("Indices remis à zéro");
 	}
 
-	public void clean() {
+	public void clean() { // Cette méthode élimine de aListe toutes les combinaisons qui ne correspondent pas à la proposition de l'ordinateur
 		aListe.remove(Joueur.proposition);
 
 		for (int i = 0; i < aListe.size(); i++) {// Tant que la liste complète n'est pas parcourue
