@@ -32,6 +32,7 @@ public class Mastermind extends Jeu {
 		logger.info("Joueur 1 défini comme humain");
 		// On boucle tant que le nombre mystère n'est pas trouvé
 		do {
+			devMode();
 			resetIndices();
 			afficherCompteur();
 			joueur1.proposerNombre();
@@ -55,6 +56,7 @@ public class Mastermind extends Jeu {
 		nombreMystere = Joueur.proposition;
 		System.out.println("Le nombre mystère est " + nombreMystere);
 		do {
+			devMode();
 			resetIndices();
 			afficherCompteur();
 			joueur2.piocherDansListe(aListe);
@@ -86,6 +88,7 @@ public class Mastermind extends Jeu {
 		do {
 			resetIndices();
 			nombreMystere = combinaisonJoueur1;
+			devMode();
 			System.out.println("À vous :");
 			afficherCompteur();
 			joueur1.proposerNombre();
@@ -97,6 +100,7 @@ public class Mastermind extends Jeu {
 			}
 
 			nombreMystere = combinaisonJoueur2;
+			devMode();
 			System.out.println("À l'ordinateur :");
 			resetIndices();
 			afficherCompteur();

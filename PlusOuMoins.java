@@ -25,6 +25,7 @@ public class PlusOuMoins extends Jeu {
 		logger.info("Joueur 1 défini comme humain");
 		// On boucle tant que le nombre mystère n'est pas trouvé
 		do {
+			devMode();
 			afficherCompteur();
 			joueur1.proposerNombre();
 			comparerNombres(joueur1);
@@ -46,6 +47,7 @@ public class PlusOuMoins extends Jeu {
 		nombreMystere = Joueur.proposition;
 		System.out.println("Le nombre mystère est " + nombreMystere + ".\n");
 		do {
+			devMode();
 			afficherCompteur();
 			joueur2.proposerNombre();
 			comparerNombres(joueur2);
@@ -71,6 +73,7 @@ public class PlusOuMoins extends Jeu {
 
 		do {
 			nombreMystere = combinaisonJoueur1;
+			devMode();
 			afficherCompteur();
 			System.out.println("À vous : ");
 			joueur1.proposerNombre();
@@ -81,6 +84,7 @@ public class PlusOuMoins extends Jeu {
 			}
 
 			nombreMystere = combinaisonJoueur2;
+			devMode();
 			System.out.println("À l'ordinateur :");
 			joueur2.proposerNombre();
 			comparerNombres(joueur2);

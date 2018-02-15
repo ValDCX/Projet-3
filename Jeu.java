@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
-
 import org.apache.log4j.Logger;
 
 
@@ -12,6 +11,7 @@ public abstract class Jeu {
 
 	private static Logger logger = Logger.getLogger(Main.class);
 	
+	static int devMode;
 	Joueur joueur1;
 	Joueur joueur2;
 	String nomDuJeu;
@@ -32,7 +32,7 @@ public abstract class Jeu {
 
 			// Chargement du fichier config
 			prop.load(input);
-
+			
 			longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurPlusOuMoins"));
 			coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
 			nombreUtilises = new int[Integer.valueOf(prop.getProperty("couleurs"))];
@@ -165,6 +165,13 @@ public abstract class Jeu {
 	public void afficherCompteur() {
 		logger.info("Affichage du compteur de coups (coup n°"+compteur+")");
 		System.out.println("Coup n°" + (compteur));
+	}
+	
+	public void devMode() {
+		if (devMode == 1)
+		{
+			System.out.println("[Mode développeur] Le nombre mystère est : "+nombreMystere);
+		}
 	}
 
 }
